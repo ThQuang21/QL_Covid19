@@ -86,7 +86,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jpnTrangChu.setBackground(new java.awt.Color(214, 230, 242));
 
         jlbTrangChu.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jlbTrangChu.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyCovid\\src\\main\\resources\\person.png")); // NOI18N
+        jlbTrangChu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/person.png"))); // NOI18N
         jlbTrangChu.setText("Patients");
 
         javax.swing.GroupLayout jpnTrangChuLayout = new javax.swing.GroupLayout(jpnTrangChu);
@@ -109,7 +109,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jpnSanPham.setBackground(new java.awt.Color(214, 230, 242));
 
         jlbSanPham.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jlbSanPham.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyCovid\\src\\main\\resources\\inventory.png")); // NOI18N
+        jlbSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inventory.png"))); // NOI18N
         jlbSanPham.setText("Products");
 
         javax.swing.GroupLayout jpnSanPhamLayout = new javax.swing.GroupLayout(jpnSanPham);
@@ -132,7 +132,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(214, 230, 242));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel4.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyCovid\\src\\main\\resources\\package.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/package.png"))); // NOI18N
         jLabel4.setText("Packages");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -154,7 +154,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel8.setBackground(new java.awt.Color(214, 230, 242));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyCovid\\src\\main\\resources\\chart.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/package.png"))); // NOI18N
         jLabel5.setText("Statistic");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -215,7 +215,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jpnView.setLayout(jpnViewLayout);
         jpnViewLayout.setHorizontalGroup(
             jpnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 656, Short.MAX_VALUE)
+            .addGap(0, 676, Short.MAX_VALUE)
         );
         jpnViewLayout.setVerticalGroup(
             jpnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,9 +228,8 @@ public class MainJFrame extends javax.swing.JFrame {
             jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnRootLayout.createSequentialGroup()
                 .addComponent(jpnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jpnView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnRootLayout.setVerticalGroup(
             jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

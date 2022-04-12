@@ -13,10 +13,11 @@ public class NguoiDung implements Serializable  {
 	private String name;
 	private int YOB;
 	private int status;
-	private int debt;
+	private int debt = 0;
 	private String linkedPID;
-	private String bvID;
-	NguoiDung(String id, String n, int y, int stat, String pid){
+	private String Hospital;
+        private String Address ="";
+	public NguoiDung(String id, String n, int y, int stat, String pid){
 		cmnd = id;
 		name = n;
 		YOB = y;
@@ -24,7 +25,7 @@ public class NguoiDung implements Serializable  {
 		linkedPID = pid;
 		status = stat;
 	}
-	NguoiDung(String id, String n, int y, int stat, String pid, int d){
+	public NguoiDung(String id, String n, int y, int stat, String pid, int d){
 		cmnd = id;
 		name = n;
 		YOB = y;
@@ -32,67 +33,73 @@ public class NguoiDung implements Serializable  {
 		linkedPID = pid;
 		status = stat;
 	}
-	NguoiDung(String id, String n, int y, int stat, String pid, int d, String bv){
+	public NguoiDung(String id, String n, int y, int stat, String pid, int d, String bv){
 		cmnd = id;
 		name = n;
 		YOB = y;
 		debt = d;
 		linkedPID = pid;
 		status = stat;
-		bvID = bv;
+		Hospital = bv;
 	}
-	NguoiDung(){
+	public NguoiDung(){
 	}
-	void setCMND(String n) {
+	public void setCMND(String n) {
 		cmnd = n;
 	}
-	String getCMND() {
+	public String getCMND() {
 		return cmnd;
 	}
-	void setName(String n) {
+	public void setName(String n) {
 		name = n;
 	}
-	String getName() {
+	public String getName() {
 		return name;
 	}
-	void setYear(int y) {
+	public void setYear(int y) {
 		YOB = y;
 	}
-	int getYear() {
+	public int getYear() {
 		return YOB;
 	}
-	void setStatus(int s) {
+	public void setStatus(int s) {
 		status = s;
 	}
-	int getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	void setDebt(int d) {
+	public void setDebt(int d) {
 		debt = d;
 	}
-	int getDebt() {
+	public int getDebt() {
 		return debt;
 	}
-	void addDebt(int a) {
+	public void addDebt(int a) {
 		debt = debt + a;
 	}
-	void minusDebt(int m) {
+	public void minusDebt(int m) {
 		debt = debt - m;
 	}
-	String getLinkedPID() {
+	public String getLinkedPID() {
 		return linkedPID;
 	}
-	void setLinkedPID(String l) {
+	public void setLinkedPID(String l) {
 		linkedPID = l;
 	}
-	String getbvID() {
-		return bvID;
+	public String getHospital() {
+		return Hospital;
 	}
-	void setbvID(String l) {
-		bvID = l;
+	public void setHospital(String l) {
+		Hospital = l;
+	}
+        public String getAddress() {
+		return Address;
+	}
+	public void setAddress(String l) {
+		Address = l;
 	}
         @Override
 	public String toString() {
-		return cmnd + " " + name + " " + YOB + " " + status + " " + linkedPID + " " + debt + " " + bvID;
+		return cmnd + " " + name + " " + YOB + " " + status + " " + Address + " " + linkedPID + " " + debt + " " + Hospital;
 	}
 }
