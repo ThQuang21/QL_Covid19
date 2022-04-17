@@ -8,9 +8,12 @@ import com.laq.quanlycovid.model.NguoiDung;
 import com.laq.quanlycovid.service.NguoiDungService;
 import com.laq.quanlycovid.service.NguoiDungServiceImpl;
 import com.laq.quanlycovid.utility.ClassTableModel;
+import com.laq.quanlycovid.view.NguoiDungJFrame;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -74,7 +77,37 @@ public class QuanLyNguoiDungController {
             }
         
     });
-        
+     
+     table.addMouseListener(new MouseAdapter(){
+         @Override
+         public void mouseClicked(MouseEvent e){
+             if(e.getClickCount() == 2 && table.getSelectedRow() != -1){
+                 DefaultTableModel model = (DefaultTableModel)table.getModel();
+                 int selectedRowIndex = table.getSelectedRow();
+                 selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
+                 System.out.println(selectedRowIndex);
+                 
+                 NguoiDung nguoiDung = new NguoiDung();
+                 
+                 nguoiDung.setCMND(model.getValueAt(selectedRowIndex, 0).toString());
+                 nguoiDung.setName(model.getValueAt(selectedRowIndex, 1).toString());
+                 nguoiDung.setYear((int)model.getValueAt(selectedRowIndex, 2));
+                 nguoiDung.setStatus(Integer.parseInt(model.getValueAt(selectedRowIndex, 3).toString().substring(1)));
+                 nguoiDung.setAddress(model.getValueAt(selectedRowIndex, 4).toString());
+                 nguoiDung.setHospital(model.getValueAt(selectedRowIndex, 5).toString());
+                 nguoiDung.setLinkedPID(model.getValueAt(selectedRowIndex, 6).toString());
+                 nguoiDung.setDebt((int)model.getValueAt(selectedRowIndex, 7));
+                 System.out.println(nguoiDung);
+                 
+                 NguoiDungJFrame frame = new NguoiDungJFrame(nguoiDung);
+                 frame.setTitle("Thông Tin Người Dùng");
+                 frame.setResizable(false);
+                 frame.setLocationRelativeTo(null);
+                 frame.setVisible(true);
+             }
+         }
+     });
+     
      table.getTableHeader().setFont(new Font("Arial", Font.BOLD,14));
      table.getTableHeader().setPreferredSize(new Dimension(100,50));
      table.setRowHeight(50);
