@@ -7,6 +7,7 @@ package com.laq.quanlycovid.service;
 
 import com.laq.quanlycovid.dao.NguoiDungDAO;
 import com.laq.quanlycovid.dao.NguoiDungDAOImpl;
+import com.laq.quanlycovid.model.DiaChi;
 import com.laq.quanlycovid.model.NguoiDung;
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,8 +22,29 @@ public class NguoiDungServiceImpl implements NguoiDungService {
         nguoiDungDAO = new NguoiDungDAOImpl();
     }
     @Override
-    public List<NguoiDung> getList() {
+    public ArrayList<NguoiDung> getList() {
         return nguoiDungDAO.getList();
+    }
+     public List<NguoiDung> getRelateList(String cmnd) {
+        return nguoiDungDAO.getRelateList(cmnd);
+    }
+     public DiaChi getDiaChi (String cmnd){
+         return nguoiDungDAO.getDiaChi(cmnd);
+     }
+     public int createNguoiDung(NguoiDung nd, DiaChi dc){
+         return nguoiDungDAO.createNguoiDung(nd, dc);
+     }
+    public int updateNguoiDung(NguoiDung old, NguoiDung upd, DiaChi dc_old, int flag){
+        return nguoiDungDAO.updateNguoiDung(old, upd, dc_old, flag);
+    }
+    public List<String> getPhuong(){
+        return nguoiDungDAO.getPhuong();
+    }
+    public List<String> getQuan(){
+        return nguoiDungDAO.getQuan();
+    }
+    public List<String> getThanhPho(){
+        return nguoiDungDAO.getThanhPho();
     }
     
 }

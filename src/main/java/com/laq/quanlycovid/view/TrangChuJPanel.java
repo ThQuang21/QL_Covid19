@@ -19,6 +19,7 @@ public class TrangChuJPanel extends javax.swing.JPanel {
         initComponents();
         QuanLyNguoiDungController controller = new QuanLyNguoiDungController(jpnView, btnAdd, jtfSearch);
         controller.setDataToTable();
+        controller.setEvent();
     }
 
     /**

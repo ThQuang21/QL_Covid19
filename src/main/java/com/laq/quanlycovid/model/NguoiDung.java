@@ -12,12 +12,11 @@ public class NguoiDung implements Serializable  {
 	private String cmnd;
 	private String name;
 	private int YOB;
-	private int status;
+	private String status;
 	private int debt = 0;
 	private String linkedPID;
 	private String Hospital;
-        private String Address ="";
-	public NguoiDung(String id, String n, int y, int stat, String pid){
+	public NguoiDung(String id, String n, int y, String stat, String pid){
 		cmnd = id;
 		name = n;
 		YOB = y;
@@ -25,7 +24,7 @@ public class NguoiDung implements Serializable  {
 		linkedPID = pid;
 		status = stat;
 	}
-	public NguoiDung(String id, String n, int y, int stat, String pid, int d){
+	public NguoiDung(String id, String n, int y, String stat, String pid, int d){
 		cmnd = id;
 		name = n;
 		YOB = y;
@@ -33,7 +32,7 @@ public class NguoiDung implements Serializable  {
 		linkedPID = pid;
 		status = stat;
 	}
-	public NguoiDung(String id, String n, int y, int stat, String pid, int d, String bv){
+	public NguoiDung(String id, String n, int y, String stat, String pid, int d, String bv){
 		cmnd = id;
 		name = n;
 		YOB = y;
@@ -62,10 +61,10 @@ public class NguoiDung implements Serializable  {
 	public int getYear() {
 		return YOB;
 	}
-	public void setStatus(int s) {
+	public void setStatus(String s) {
 		status = s;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 	public void setDebt(int d) {
@@ -92,14 +91,8 @@ public class NguoiDung implements Serializable  {
 	public void setHospital(String l) {
 		Hospital = l;
 	}
-        public String getAddress() {
-		return Address;
-	}
-	public void setAddress(String l) {
-		Address = l;
-	}
         @Override
 	public String toString() {
-		return cmnd + " " + name + " " + YOB + " " + status + " " + Address + " " + linkedPID + " " + debt + " " + Hospital;
+		return cmnd + " " + name + " " + YOB + " " + status + " " + linkedPID + " " + debt + " " + Hospital;
 	}
 }

@@ -6,6 +6,7 @@ package com.laq.quanlycovid.main;
 
 import static com.laq.quanlycovid.dao.DBConnect.getConnection;
 import com.laq.quanlycovid.view.MainJFrame;
+import com.laq.quanlycovid.view.MainJFrame_1;
 import java.sql.*;
 /**
  *
@@ -13,6 +14,7 @@ import java.sql.*;
  */
 public class Main {
     public static void main(String[] args) throws SQLException {
-        new MainJFrame().setVisible(true);
+//        new MainJFrame().setVisible(true);
+          new MainJFrame_1().setVisible(true);
     }
 }

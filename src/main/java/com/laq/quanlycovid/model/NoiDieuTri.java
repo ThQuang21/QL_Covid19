@@ -9,15 +9,14 @@ import java.io.Serializable;
  * @author Envy
  */
 public class NoiDieuTri implements Serializable{
-    private String id;
     private String ten;
     private int sucChua;
     private int soLuongHienTai;
-    public void setID(String ID){
-        this.id = ID;
-    }
-    public String getID(){
-        return this.id;
+    public NoiDieuTri(){};
+    public NoiDieuTri(String ten, int sc, int sl){
+        this.ten = ten;
+        this.sucChua = sc;
+        this.soLuongHienTai = sl;
     }
     public void setTen(String n){
         ten = n;

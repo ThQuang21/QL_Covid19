@@ -18,17 +18,15 @@ public class NoiDieuTriDAOImpl implements NoiDieuTriDAO {
     public List<NoiDieuTri> getList() {
         try{
             Connection conn = DBConnect.getConnection();
-            String sql = "SELECT * FROM COQUAN";
+            String sql = "SELECT * FROM COQUAN WHERE SOLUONG < SUCCHUA";
             List<NoiDieuTri> list = new ArrayList<>();
             PreparedStatement ps = conn.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 NoiDieuTri tmp = new NoiDieuTri();
-                tmp.setID(rs.getString("ID"));
                 tmp.setTen(rs.getString("TEN"));
                 tmp.setSucChua(rs.getInt("SUCCHUA"));
                 tmp.setSoLuongHienTai(rs.getInt("SOLUONG"));
-//                System.out.println(tmp);
                 list.add(tmp);
             }
             ps.close();

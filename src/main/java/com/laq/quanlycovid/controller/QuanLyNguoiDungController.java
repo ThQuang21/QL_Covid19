@@ -10,10 +10,12 @@ import com.laq.quanlycovid.service.NguoiDungServiceImpl;
 import com.laq.quanlycovid.utility.ClassTableModel;
 import com.laq.quanlycovid.view.NguoiDungJFrame;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -32,7 +34,7 @@ public class QuanLyNguoiDungController {
     private JTextField jtfSearch;
     
     private NguoiDungService nguoiDungService = null;
-    private String[] listColumn= {"CMND","Họ và Tên","Năm Sinh","Trạng Thái","Địa Chỉ","Bệnh viện","Người liên quan","Nợ"};
+    private String[] listColumn= {"CMND","Họ và Tên","Năm Sinh","Trạng Thái","Bệnh viện","Người liên quan","Nợ"};
     private TableRowSorter<TableModel> rowSorter = null;
     
     public QuanLyNguoiDungController(JPanel jpnView, JButton btnAdd, JTextField jtfSearch){
@@ -43,7 +45,7 @@ public class QuanLyNguoiDungController {
     }
     
     public void setDataToTable(){
-        List<NguoiDung> listItem;
+        ArrayList<NguoiDung> listItem;
         listItem = nguoiDungService.getList();
         DefaultTableModel model = new ClassTableModel().setTableNguoiDung(listItem, listColumn);
         JTable table= new JTable(model);
@@ -84,7 +86,7 @@ public class QuanLyNguoiDungController {
              if(e.getClickCount() == 2 && table.getSelectedRow() != -1){
                  DefaultTableModel model = (DefaultTableModel)table.getModel();
                  int selectedRowIndex = table.getSelectedRow();
-                 selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
+                 //selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
                  System.out.println(selectedRowIndex);
                  
                  NguoiDung nguoiDung = new NguoiDung();
@@ -92,11 +94,10 @@ public class QuanLyNguoiDungController {
                  nguoiDung.setCMND(model.getValueAt(selectedRowIndex, 0).toString());
                  nguoiDung.setName(model.getValueAt(selectedRowIndex, 1).toString());
                  nguoiDung.setYear((int)model.getValueAt(selectedRowIndex, 2));
-                 nguoiDung.setStatus(Integer.parseInt(model.getValueAt(selectedRowIndex, 3).toString().substring(1)));
-                 nguoiDung.setAddress(model.getValueAt(selectedRowIndex, 4).toString());
-                 nguoiDung.setHospital(model.getValueAt(selectedRowIndex, 5).toString());
-                 nguoiDung.setLinkedPID(model.getValueAt(selectedRowIndex, 6).toString());
-                 nguoiDung.setDebt((int)model.getValueAt(selectedRowIndex, 7));
+                 nguoiDung.setStatus(model.getValueAt(selectedRowIndex, 3).toString());
+                 nguoiDung.setHospital(model.getValueAt(selectedRowIndex, 4).toString());
+                 nguoiDung.setLinkedPID(model.getValueAt(selectedRowIndex, 5).toString());
+                 nguoiDung.setDebt((int)model.getValueAt(selectedRowIndex, 6));
                  System.out.println(nguoiDung);
                  
                  NguoiDungJFrame frame = new NguoiDungJFrame(nguoiDung);
@@ -123,5 +124,26 @@ public class QuanLyNguoiDungController {
      jpnView.add(scrollpane);
      jpnView.validate();
      jpnView.repaint();
+    }
+    public void setEvent(){
+        btnAdd.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked (MouseEvent e){
+                NguoiDungJFrame frame = new NguoiDungJFrame(new NguoiDung());
+                frame.setTitle("Thêm người");
+                frame.setLocationRelativeTo(null);
+                frame.setResizable(false);
+                frame.setVisible(true);
+            }
+            @Override
+            public void mouseEntered (MouseEvent e){
+                btnAdd.setBackground(new Color (118,159,205));
+                
+            }
+            @Override
+            public void mouseExited (MouseEvent e){
+                btnAdd.setBackground(new Color (185,215,234));
+            }
+        });
     }
 }

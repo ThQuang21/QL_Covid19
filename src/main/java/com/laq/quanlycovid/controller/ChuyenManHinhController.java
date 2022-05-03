@@ -9,6 +9,7 @@ import javax.swing.*;
 import com.laq.quanlycovid.view.TrangChuJPanel;
 import com.laq.quanlycovid.bean.DanhMucBean;
 import com.laq.quanlycovid.view.ProductsJPanel;
+import com.laq.quanlycovid.view.StatisticJPanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -64,6 +65,9 @@ public class ChuyenManHinhController {
                     break;
                 case "SanPham":
                     node = new ProductsJPanel();
+                    break;
+                case "ThongKe":
+                    node = new StatisticJPanel();
                     break;
                 default:
                     break;
