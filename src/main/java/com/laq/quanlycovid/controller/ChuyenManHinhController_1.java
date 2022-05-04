@@ -23,9 +23,11 @@ public class ChuyenManHinhController_1 {
     private JPanel root;
     private String selected ="";
     private List<DanhMucBean> listItem;
+    private String cmnd;
     
-    public ChuyenManHinhController_1(JPanel root){
+    public ChuyenManHinhController_1(JPanel root, String cmnd){
         this.root = root;
+        this.cmnd = cmnd;
     }
     public void setView(JPanel jpnItem, JLabel jlbItem){
         selected = "TrangChu";
@@ -33,7 +35,7 @@ public class ChuyenManHinhController_1 {
         jlbItem.setBackground(new Color(247, 251, 252));
         root.removeAll();
         root.setLayout(new BorderLayout());
-        root.add(new TrangChuJPanel_1());
+        root.add(new TrangChuJPanel_1(cmnd));
         root.validate();
         root.repaint();
         
@@ -63,10 +65,10 @@ public class ChuyenManHinhController_1 {
         public void mouseClicked(MouseEvent e) {
             switch(kind){
                 case "TrangChu":
-                    node = new TrangChuJPanel_1();
+                    node = new TrangChuJPanel_1(cmnd);
                     break;
                 case "LichSuQL":
-                    node = new LichSuQuanLyJPanel();
+                    node = new LichSuQuanLyJPanel(cmnd);
                     break;
                 case "ThongKe":
                     node = new StatisticJPanel();

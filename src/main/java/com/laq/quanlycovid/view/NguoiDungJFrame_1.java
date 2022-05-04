@@ -4,7 +4,7 @@
  */
 package com.laq.quanlycovid.view;
 
-import com.laq.quanlycovid.controller.NguoiDungController;
+import com.laq.quanlycovid.controller.ChinhSuaNguoiDungController_1;
 import com.laq.quanlycovid.model.NguoiDung;
 
 /**
@@ -18,10 +18,10 @@ public class NguoiDungJFrame_1 extends javax.swing.JFrame {
      */
     public NguoiDungJFrame_1(NguoiDung nguoiDung) {
         initComponents(); 
-//        NguoiDungController controller = new NguoiDungController(btnSubmit,jtfCMND,jtfHoTen, jtfYear, jtfNgLienQuan,
-//                jtfNo, jcbTrangThai, jcbBenhVien, jtbNgLQ, jtfDiaChi, jcbPhuong, jcbQuan, jcbTP, jlbMsg);
-//        controller.setView(nguoiDung);
-//        controller.setEvent();
+        ChinhSuaNguoiDungController_1 controller = new ChinhSuaNguoiDungController_1(btnSubmit,jtfCMND,jtfHoTen, jtfYear,
+                jtfDiaChi, jcbPhuong, jcbQuan, jcbTP, jlbMsg);
+        controller.setView(nguoiDung);
+        controller.setEvent();
     }
 
     /**
@@ -83,6 +83,7 @@ public class NguoiDungJFrame_1 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Cmnd:");
 
+        jtfCMND.setEditable(false);
         jtfCMND.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtfCMND.setText("jTextField1");
 

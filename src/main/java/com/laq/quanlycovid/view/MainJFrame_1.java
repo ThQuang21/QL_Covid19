@@ -12,15 +12,16 @@ import java.util.*;
  * @author Envy
  */
 public class MainJFrame_1 extends javax.swing.JFrame {
-
+//    private String cmnd;
     /**
      * Creates new form MainJFrame
      */
-    public MainJFrame_1() {
+    public MainJFrame_1(String cmnd) {
+//        this.cmnd = cmnd;
         initComponents();
         setTitle("Covid Management");
         
-        ChuyenManHinhController_1 controller = new ChuyenManHinhController_1(jpnView);
+        ChuyenManHinhController_1 controller = new ChuyenManHinhController_1(jpnView, cmnd);
         controller.setView(jpnTrangChu, jlbTrangChu);
         List<DanhMucBean> listItem = new ArrayList<>();
         listItem.add(new DanhMucBean("TrangChu", jpnTrangChu, jlbTrangChu));
@@ -160,7 +161,7 @@ public class MainJFrame_1 extends javax.swing.JFrame {
         jpnLichSuQL.setBackground(new java.awt.Color(214, 230, 242));
 
         jlbLichSuQL.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jlbLichSuQL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/history.png"))); // NOI18N
+        jlbLichSuQL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/person.png"))); // NOI18N
         jlbLichSuQL.setText("Control History");
 
         javax.swing.GroupLayout jpnLichSuQLLayout = new javax.swing.GroupLayout(jpnLichSuQL);

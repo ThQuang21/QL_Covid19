@@ -4,6 +4,8 @@
  */
 package com.laq.quanlycovid.view;
 
+import com.laq.quanlycovid.controller.LichSuQuanLyController_1;
+
 /**
  *
  * @author Envy
@@ -13,8 +15,10 @@ public class LichSuQuanLyJPanel extends javax.swing.JPanel {
     /**
      * Creates new form LichSuQuanLyJPanel
      */
-    public LichSuQuanLyJPanel() {
+    public LichSuQuanLyJPanel(String cmnd) {
         initComponents();
+        LichSuQuanLyController_1 controller = new LichSuQuanLyController_1(cmnd, jtbLichSu);
+        controller.setView();
     }
 
     /**
@@ -26,19 +30,77 @@ public class LichSuQuanLyJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtbLichSu = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+
+        jtbLichSu.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jtbLichSu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Trạng thái mới", "Trạng thái cũ", "Bệnh viện mới", "Bệnh viện cũ"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jtbLichSu.setRowHeight(40);
+        jtbLichSu.getTableHeader().setReorderingAllowed(false);
+        jtbLichSu.setUpdateSelectionOnSort(false);
+        jScrollPane1.setViewportView(jtbLichSu);
+        if (jtbLichSu.getColumnModel().getColumnCount() > 0) {
+            jtbLichSu.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jtbLichSu.getColumnModel().getColumn(0).setMaxWidth(100);
+            jtbLichSu.getColumnModel().getColumn(1).setPreferredWidth(100);
+            jtbLichSu.getColumnModel().getColumn(1).setMaxWidth(100);
+        }
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Lịch Sử Quản Lý");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(17, 17, 17))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1)
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtbLichSu;
     // End of variables declaration//GEN-END:variables
 }

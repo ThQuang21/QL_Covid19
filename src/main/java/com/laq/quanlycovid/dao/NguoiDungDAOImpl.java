@@ -5,6 +5,8 @@
 package com.laq.quanlycovid.dao;
 
 import com.laq.quanlycovid.model.DiaChi;
+import com.laq.quanlycovid.model.LichSuQuanLy;
+import com.laq.quanlycovid.model.MD5;
 import com.laq.quanlycovid.model.NguoiDung;
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,6 +17,33 @@ import java.util.List;
  * @author Envy
  */
 public class NguoiDungDAOImpl implements NguoiDungDAO {
+    @Override
+    public NguoiDung getNguoi(String cmnd){
+        try{
+            Connection conn = DBConnect.getConnection();
+            String sql = "SELECT * FROM NGUOI_LIEN_QUAN WHERE CMND=?";
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, cmnd);
+            ResultSet rs = ps.executeQuery();
+            NguoiDung tmp = new NguoiDung();
+            while (rs.next()){
+                tmp.setCMND(rs.getString("CMND"));
+                tmp.setName(rs.getString("TEN"));
+                tmp.setYear(rs.getInt("NAMSINH"));
+                tmp.setStatus(rs.getString("TRANGTHAI"));
+                tmp.setDebt(rs.getInt("DUNO"));
+                tmp.setLinkedPID(rs.getString("NGLIENQUAN"));
+                tmp.setHospital(rs.getString("BV"));
+            }
+            ps.close();
+            rs.close();
+            conn.close();
+            return tmp;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
     @Override
     public ArrayList<NguoiDung> getList() {
         try{
@@ -135,6 +164,13 @@ public class NguoiDungDAOImpl implements NguoiDungDAO {
             ps.setString(3, dc.getPhuong());
             ps.setString(4, dc.getQuan());
             ps.setString(5, dc.getThanhPho());
+            ps.executeUpdate();
+            sql = "INSERT INTO LOGIN (ID, PASSWORD, TYPE)"
+                    + "VALUES(?,?,?)";
+            ps = conn.prepareCall(sql);
+            ps.setString(1, nd.getCMND());
+            ps.setString(2, MD5.ToMD5(nd.getCMND()));
+            ps.setInt(3, 1);
             ps.executeUpdate();
             conn.commit();
             ps.close();
@@ -427,7 +463,113 @@ public class NguoiDungDAOImpl implements NguoiDungDAO {
         }
         return null;
     }
-    
+    @Override
+    public int updateNguoiDungCaNhan(NguoiDung nd, DiaChi dc){
+        try {
+            Connection conn = DBConnect.getConnection();
+            conn.setAutoCommit(false);
+            String sql = "UPDATE NGUOI_LIEN_QUAN SET TEN=?, NAMSINH=? "
+                    + "WHERE CMND=?";
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, nd.getName());
+            ps.setInt(2, nd.getYear());
+            ps.setString(3, nd.getCMND());
+            ps.executeUpdate();
+            sql = "UPDATE DIACHI SET DUONG=?, PHUONG=?, QUAN=?, TP=? WHERE ID = ? ";
+            ps = conn.prepareCall(sql);
+            ps.setString(1, dc.getDiaChi());
+            ps.setString(2, dc.getPhuong());
+            ps.setString(3, dc.getQuan());
+            ps.setString(4, dc.getThanhPho());
+            ps.setString(5, nd.getCMND());
+            ps.executeUpdate();
+            conn.commit();
+            ps.close();
+            conn.close();
+            return 1;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return 0;
+        }
+    }
+    @Override
+    public String getPass(String cmnd){
+        try{
+            Connection conn = DBConnect.getConnection();
+            String sql = "SELECT * FROM LOGIN WHERE ID = ?";
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, cmnd);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String tmp = rs.getString("PASSWORD");
+            rs.close();
+            conn.close();
+            return tmp;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    @Override
+    public int updatePass(String cmnd, String pass){
+         try {
+            Connection conn = DBConnect.getConnection();
+            String sql = "UPDATE LOGIN SET PASSWORD=? WHERE ID=?";
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, pass);
+            ps.setString(2, cmnd);
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+            return 1;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return 0;
+        }
+    }
+    @Override
+    public int getTypeAccount(String cmnd){
+        try{
+            Connection conn = DBConnect.getConnection();
+            String sql = "SELECT * FROM LOGIN WHERE ID = ?";
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, cmnd);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int tmp = rs.getInt("TYPE");
+            rs.close();
+            conn.close();
+            return tmp;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return -1;
+        }
+    }
+    public List<LichSuQuanLy> getLichSuQL(String cmnd){
+        try{
+            Connection conn = DBConnect.getConnection();
+            String sql = "SELECT * FROM LS_QUAN_LY WHERE CMND=?";
+            ArrayList<LichSuQuanLy> list = new ArrayList<>();
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, cmnd);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                LichSuQuanLy tmp = new LichSuQuanLy();
+                tmp.setTtmoi(rs.getString("TRANGTHAI_MOI"));
+                tmp.setTtcu(rs.getString("TRANGTHAI_CU"));
+                tmp.setBvmoi(rs.getString("DIADIEM_MOI"));
+                tmp.setBvcu(rs.getString("DIADIEM_CU"));
+                list.add(tmp);
+            }
+            ps.close();
+            rs.close();
+            conn.close();
+            return list;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
     public static void main(String args[]){
         NguoiDungDAO a = new NguoiDungDAOImpl();
         System.out.println(a.getDiaChi("10000001"));
