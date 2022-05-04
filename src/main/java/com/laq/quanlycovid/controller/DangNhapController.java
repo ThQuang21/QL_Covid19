@@ -14,10 +14,13 @@ import javax.swing.JTextField;
 import com.laq.quanlycovid.model.MD5;
 import com.laq.quanlycovid.service.NguoiDungService;
 import com.laq.quanlycovid.service.NguoiDungServiceImpl;
+import com.laq.quanlycovid.view.AdminJFrame;
 import com.laq.quanlycovid.view.MainJFrame;
 import com.laq.quanlycovid.view.MainJFrame_1;
 import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JDialog;
+import javax.swing.border.Border;
 /**
  *
  * @author Envy
@@ -43,17 +46,26 @@ public class DangNhapController {
             @Override
             public void mouseClicked (MouseEvent e){
                 boolean filled = true;
-                if (jtfCMND.getText().length() == 0)
+                Border border = BorderFactory.createLineBorder(Color.RED, 1);
+                if (jtfCMND.getText().length() == 0){
                     filled = false;
-                if (String.valueOf(jpfPass.getPassword()).length() == 0)
+                    jtfCMND.setBorder(border);
+                }
+                if (String.valueOf(jpfPass.getPassword()).length() == 0){
                     filled = false;
+                    jpfPass.setBorder(border);
+                }
                 if (!filled){
                     jlbMsg.setText("Xin nhập đầy đủ các trường");
                 }
                 else{
-                    jlbMsg.setText("Done Check filled");
+//                    jlbMsg.setText("Done Check filled");
                     String check = MD5.ToMD5(jtfCMND.getText());
                     String defPass = nguoiDungService.getPass(jtfCMND.getText());
+                    if(defPass == null){
+                        jlbMsg.setText("Wrong ID !");
+                        return;
+                    }
                     String pass = MD5.ToMD5(String.valueOf(jpfPass.getPassword()));
                     System.out.println("Default pass: " + check + "Default in sql: " + defPass);
                     if (check.equals(defPass)){
@@ -70,6 +82,12 @@ public class DangNhapController {
                         else if (type == 2){
                             dialog.dispose();
                             MainJFrame frame = new MainJFrame();
+                            frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                            frame.setVisible(true);
+                        }
+                        else if (type == 3){
+                            dialog.dispose();
+                            AdminJFrame frame = new AdminJFrame();
                             frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
                             frame.setVisible(true);
                         }
@@ -91,9 +109,18 @@ public class DangNhapController {
                             frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
                             frame.setVisible(true);
                         }
-                        else{
-                             jlbMsg.setText("Error !");
+                        else if (type == 3){
+                            dialog.dispose();
+                            AdminJFrame frame = new AdminJFrame();
+                            frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                            frame.setVisible(true);
                         }
+                        else{
+                             jlbMsg.setText("Wrong ID !");
+                        }
+                    }
+                    else{
+                        jlbMsg.setText("Wrong Pass !");
                     }
 
                 }

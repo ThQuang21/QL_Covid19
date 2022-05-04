@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import com.laq.quanlycovid.model.MD5;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
 /**
  *
@@ -43,12 +45,19 @@ public class DoiPassController_1 {
             @Override
             public void mouseClicked (MouseEvent e){
                 boolean filled = true;
-                if (String.valueOf(jpfOld.getPassword()).length() == 0)
+                Border border = BorderFactory.createLineBorder(Color.RED, 1);
+                if (String.valueOf(jpfOld.getPassword()).length() == 0){
                     filled = false;
-                if (String.valueOf(jpfNew.getPassword()).length() == 0)
+                    jpfOld.setBorder(border);
+                }
+                if (String.valueOf(jpfNew.getPassword()).length() == 0){
                     filled = false;
-                if (String.valueOf(jpfNewRepeat.getPassword()).length() == 0)
+                    jpfNew.setBorder(border);
+                }
+                if (String.valueOf(jpfNewRepeat.getPassword()).length() == 0){
                     filled = false;
+                    jpfNewRepeat.setBorder(border);
+                }
                 if (!filled){
                     jlbMsg.setText("Xin nhập đầy đủ các trường");
                 }

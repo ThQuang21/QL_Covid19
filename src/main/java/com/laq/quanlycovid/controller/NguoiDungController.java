@@ -5,6 +5,7 @@
 package com.laq.quanlycovid.controller;
 
 import com.laq.quanlycovid.model.DiaChi;
+import com.laq.quanlycovid.model.LichSuQuanLy;
 import com.laq.quanlycovid.model.NguoiDung;
 import com.laq.quanlycovid.model.NoiDieuTri;
 import com.laq.quanlycovid.service.NguoiDungService;
@@ -20,6 +21,7 @@ import java.awt.event.MouseEvent;
 import java.util.Vector;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,6 +38,7 @@ public class NguoiDungController {
     private JComboBox jcbTrangThai;
     private JComboBox jcbBenhVien;
     private JTable jtbNgLQ;
+    private JTable jtbLS;
     private JTextField jtfDiaChi;
     private JComboBox jcbPhuong;
     private JComboBox jcbQuan;
@@ -49,7 +52,7 @@ public class NguoiDungController {
     public NguoiDungController(JButton btnSubmit, JTextField jtfCMND, JTextField jtfHoTen,
             JTextField jtfYear, JTextField jtfNgLienQuan, JTextField jtfNo, JComboBox jcbTrangThai,
             JComboBox jcbBenhVien, JTable jtbNgLQ, JTextField jtfDiaChi, JComboBox jcbPhuong, JComboBox jcbQuan,
-            JComboBox jcbTP, JLabel jlbMsg){
+            JComboBox jcbTP, JLabel jlbMsg, JTable jtbLS){
         this.btnSubmit = btnSubmit;
         this.jtfCMND = jtfCMND;
         this.jtfHoTen = jtfHoTen;
@@ -59,6 +62,7 @@ public class NguoiDungController {
         this.jcbTrangThai = jcbTrangThai;
         this.jcbBenhVien = jcbBenhVien;
         this.jtbNgLQ = jtbNgLQ;
+        this.jtbLS = jtbLS;
         this.jtfDiaChi = jtfDiaChi;
         this.jcbPhuong = jcbPhuong;
         this.jcbQuan = jcbQuan;
@@ -94,6 +98,11 @@ public class NguoiDungController {
         for(NguoiDung a : listLQ){
             model.addRow(new Object[]{a.getCMND(), a.getName(), a.getYear()});
         }
+        List<LichSuQuanLy> listLS = nguoiDungService.getLichSuQL(nguoiDung.getCMND());
+        DefaultTableModel model1 = (DefaultTableModel) jtbLS.getModel();
+        for(LichSuQuanLy b : listLS){
+            model1.addRow(new Object[]{b.getTtmoi(),b.getTtcu(), b.getBvmoi(), b.getBvcu()});
+        }
         dc = nguoiDungService.getDiaChi(nguoiDung.getCMND());
         jtfDiaChi.setText(dc.getDiaChi());
         jcbPhuong.removeAllItems();
@@ -123,29 +132,52 @@ public class NguoiDungController {
         btnSubmit.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked (MouseEvent e){
+                Border border = BorderFactory.createLineBorder(Color.RED, 1);
                 boolean filled = true;
-                if (jtfCMND.getText().length() == 0)
+                if (jtfCMND.getText().length() == 0){
                     filled = false;
-                if (jtfHoTen.getText().length() == 0 )
+                    jtfCMND.setBorder(border);
+                }
+                if (jtfHoTen.getText().length() == 0 ){
                     filled = false;
-                if (jtfYear.getText().length() == 0)
+                    jtfHoTen.setBorder(border);
+                }
+                if (jtfYear.getText().length() == 0){
                     filled = false;
-                if (jtfNgLienQuan.getText().length() == 0 )
+                    jtfYear.setBorder(border);
+                }
+                if (jtfNgLienQuan.getText().length() == 0 ){
                     filled = false;
-                if (jtfNo.getText().length() == 0)
+                    jtfNgLienQuan.setBorder(border);
+                }
+                if (jtfNo.getText().length() == 0){
                     filled = false;
-                if (jtfDiaChi.getText().length() == 0)
+                    jtfNo.setBorder(border);
+                }
+                if (jtfDiaChi.getText().length() == 0){
                     filled = false;
-                if (jcbPhuong.getSelectedItem() == null)
+                    jtfDiaChi.setBorder(border);
+                }
+                if (jcbPhuong.getSelectedItem() == null){
                     filled = false;
-                if (jcbQuan.getSelectedItem() == null)
-                    filled = false;   
-                if (jcbTP.getSelectedItem() == null)
+                    jcbPhuong.setBorder(border);
+                }
+                if (jcbQuan.getSelectedItem() == null){
                     filled = false;
-                if ( jcbTrangThai.getSelectedItem() == null)
+                    jcbQuan.setBorder(border);
+                }
+                if (jcbTP.getSelectedItem() == null){
                     filled = false;
-                if (jcbBenhVien .getSelectedItem() == null)
+                    jcbTP.setBorder(border);
+                }
+                if ( jcbTrangThai.getSelectedItem() == null){
                     filled = false;
+                    jcbTrangThai.setBorder(border);
+                }
+                if (jcbBenhVien .getSelectedItem() == null){
+                    filled = false;
+                    jcbBenhVien.setBorder(border);
+                }
                 if (!filled){
                     jlbMsg.setText("Xin nhập đầy đủ các trường, nếu không có người liên quan điền 0");
                 }

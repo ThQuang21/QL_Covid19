@@ -12,11 +12,13 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 /**
  *
@@ -86,20 +88,35 @@ public class ChinhSuaNguoiDungController_1 {
             @Override
             public void mouseClicked (MouseEvent e){
                 boolean filled = true;
-                if (jtfCMND.getText().length() == 0)
+                Border border = BorderFactory.createLineBorder(Color.RED, 1);
+                if (jtfCMND.getText().length() == 0){
                     filled = false;
-                if (jtfHoTen.getText().length() == 0 )
+                    jtfCMND.setBorder(border);
+                }
+                if (jtfHoTen.getText().length() == 0 ){
                     filled = false;
-                if (jtfYear.getText().length() == 0)
+                    jtfHoTen.setBorder(border);
+                }
+                if (jtfYear.getText().length() == 0){
                     filled = false;
-                if (jtfDiaChi.getText().length() == 0)
+                    jtfYear.setBorder(border);
+                }
+                if (jtfDiaChi.getText().length() == 0){
                     filled = false;
-                if (jcbPhuong.getSelectedItem() == null)
+                    jtfDiaChi.setBorder(border);
+                }
+                if (jcbPhuong.getSelectedItem() == null){
                     filled = false;
-                if (jcbQuan.getSelectedItem() == null)
-                    filled = false;   
-                if (jcbTP.getSelectedItem() == null)
+                    jcbPhuong.setBorder(border);
+                }
+                if (jcbQuan.getSelectedItem() == null){
                     filled = false;
+                    jcbQuan.setBorder(border);
+                }
+                if (jcbTP.getSelectedItem() == null){
+                    filled = false;
+                    jcbTP.setBorder(border);
+                }
                 if (!filled){
                     jlbMsg.setText("Xin nhập đầy đủ các trường");
                 }
